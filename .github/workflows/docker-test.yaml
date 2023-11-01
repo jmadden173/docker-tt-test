@@ -17,7 +17,7 @@ jobs:
       - name: Checkout tt05-verilog-demo
         uses: actions/checkout@v4
         with:
-          repository: https://github.com/TinyTapeout/tt05-verilog-demo.git
+          repository: TinyTapeout/tt05-verilog-demo
           path: tt05-verilog-demo
 
       - name: Set up Docker Buildx
