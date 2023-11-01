@@ -1,0 +1,30 @@
+name: Test docker image
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Checkout tt05-verilog-demo
+        uses: actions/checkout@v4
+        with:
+          repository: https://github.com/TinyTapeout/tt05-verilog-demo.git
+          path: tt05-verilog-demo
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build the Docker image
+        run: docker build -t docker-tt-test:latest .
+
+      - name: Run the Docker image
+        run: cd tt05-verilog-demo && docker run -v ./src:/workspace docker-tt-test:latest
