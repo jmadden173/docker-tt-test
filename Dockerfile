@@ -10,10 +10,11 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
 	iverilog \
 	verilator \
+    make \
     && rm -rf /var/lib/apt/lists/*
 
 # Install cocotb and pytest
 RUN pip3 install --break-system-packages cocotb pytest
 
 # Run the application (if needed)
-CMD ["/bin/bash"]
+CMD ["make"]
